@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from markupsafe import escape
 from models import Products
 from database import session
+import random
 
 app = Flask(__name__)
 
@@ -32,6 +33,13 @@ def product_get():
             page += f'<li>{product.name} </li>'
         page += '</ul>'
         return page
+
+    
+@app.get("/addproducts/")
+def product_add():
+    add_Product()
+    return "<h2> Add products </h2>"
+
 
 @app.post("/products/")
 def product_post():
@@ -80,10 +88,11 @@ def user(username):
 def about(subpath):
     return f"<h1> Path: #{escape(subpath)} </h1>"
 
-# def add_Product():
-#     product = Products(name = "Product1", price = 20, quantity = 10)
-#     session.add(product)
-#     session.commit()
+def add_Product():
+    random_number = random.randint(10, 99)
+    product = Products(name = f"Product- {random_number}", price = random_number, quantity = random_number)
+    session.add(product)
+    session.commit()
 
 def get_Product():
     return session.query(Products).all()
