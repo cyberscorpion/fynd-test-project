@@ -24,8 +24,12 @@ def greet(name = None):
     
 @app.get("/products/")
 def product_get():
-        products = get_Product()
-        return render_template('products.html', products = products)
+    products = get_Product()
+    return render_template('products.html', products = products)
+
+@app.get("/deleteproduct/<int:id>/")
+def deleteProduct(id):
+    return "<h2> Product deleted </h2>"
 
     
 @app.get("/addproduct/")
