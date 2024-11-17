@@ -29,6 +29,9 @@ def product_get():
 
 @app.get("/deleteproduct/<int:id>/")
 def deleteProduct(id):
+    product = session.query(Products).filter_by(id = id).first()
+    session.delete(product)
+    session.commit()
     return "<h2> Product deleted </h2>"
 
     
