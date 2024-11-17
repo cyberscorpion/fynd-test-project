@@ -2,7 +2,6 @@ from flask import Flask, request, render_template
 from markupsafe import escape
 from models import Products
 from database import session
-import random
 
 app = Flask(__name__)
 
@@ -26,12 +25,7 @@ def greet(name = None):
 @app.get("/products/")
 def product_get():
         products = get_Product()
-        page = "<h1> Products Get</h1>"
-        page += '<ul>'
-        for product in products:
-            page += f'<li>{product.name} </li>'
-        page += '</ul>'
-        return page
+        return render_template('products.html', products = products)
 
     
 @app.get("/addproduct/")
@@ -49,7 +43,7 @@ def product_post():
 
 @app.route("/products/<int:id>")
 def product(id):
-    return render_template('products.html', productid = id)
+    return "<h2> Product details page to work </h2>"
 
 # @app.route("/users/", methods=['GET', 'POST'])
 # def users():
