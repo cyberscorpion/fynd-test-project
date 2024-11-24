@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, jsonify, request, render_template
 from markupsafe import escape
 from models import Products
 from database import session
@@ -98,3 +98,12 @@ def add_Product(name, price, quantity):
 
 def get_Product():
     return session.query(Products).all()
+
+## Rest APIs
+
+@app.route("/api/data")
+def getData():
+    data = {
+        'data' : 'Rajat Jain'
+    }
+    return jsonify(data)
